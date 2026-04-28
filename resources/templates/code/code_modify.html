@@ -1,0 +1,35 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container">
+    <h5 class="my-3 border-bottom pb-2">코드수정</h5>
+	<form sec:authorize="hasRole('ADMIN')" th:action="@{/code/modify}" th:object="${code}" method="post">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
+		<div class="mb-3">
+		    <label for="id" class="form-label">연번</label>
+		    <input type="text" th:field="*{id}" name="id" id="id" class="form-control" readonly>
+		</div>
+		<div class="mb-3">
+		    <label for="codeId" class="form-label">코드</label>
+		    <input type="text" th:field="*{codeId}" name="codeId" id="codeId" class="form-control" readonly>
+		</div>
+		<div class="mb-3">
+		    <label for="code_Name1" class="form-label">코드내용</label>
+		    <input type="text" th:field="*{code_Name1}" name="code_Name1" id="code_Name1" class="form-control">
+		</div>
+		<div class="mb-3">
+		    <label for="code_Name2" class="form-label">코드설명</label>
+		    <input type="text" th:field="*{code_Name2}" name="code_Name2" id="code_Name2" class="form-control">
+		</div>
+		<div class="mb-3">
+		    <label for="floor" class="form-label">위치</label>
+		    <input type="text" th:field="*{floor}" name="floor" id="floor" class="form-control">
+		</div>
+		<div class="mb-3">
+		    <label for="telp" class="form-label">전화번호</label>
+		    <input type="text" th:field="*{telp}" name="telp" id="telp" class="form-control">
+		</div>
+		
+        <input type="submit" value="저장하기" class="btn btn-primary my-2">
+    </form>
+</div>
+</html>

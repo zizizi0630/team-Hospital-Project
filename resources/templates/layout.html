@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+	<!-- sbb CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+	<title>Spring boot version 3.5.8</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100" style="overflow-x: hidden;">
+	<!-- 네비게이션바 -->
+	<nav th:replace="~{navbar :: navbarFragment}"></nav>
+	<!-- ✅ 왼쪽 배경(고정) -->
+	<main class="flex-grow-0">
+		<div class="container-fluid p-0 d-flex">
+			<aside id="leftBg" style="
+			position: fixed;
+			top: 70px; 
+			left: 0px; 
+			width: 307px;
+			height: 100vh;  
+			background-image: url('/image/left_new.png'); 
+			background-repeat: no-repeat; 
+			background-size: 307px; 
+			background-position: left top; 
+			z-index: -1; 
+			pointer-events: none;"></aside>
+
+			<section class="flex-grow-0 container-fluid p-0">
+				<th:block layout:fragment="content"></th:block>
+			</section>
+		</div>
+	</main>
+	<!-- Footer -->
+	<footer class="footer mt-auto py-3 bg-light border-top d-inline-block">
+		<div class="position-static">
+			<div class="container text-center" style="font-size: 0.95rem;">
+				<div class="mb-2">
+					<a href="javascript:_privacy();" class="text-muted mx-2 text-decoration-none">개인정보보호정책</a> |
+					<a href="javascript:_mailstop();" class="text-muted mx-2 text-decoration-none">메일주소무단수집거부</a>
+				</div>
+
+				<div class="mb-1">
+					<img src="/image/TeamLogo.png" style="width: 256px;" alt="TeamLogo" />
+				</div>
+
+				<div class="text-muted">
+					<span><strong>404 Found 팀</strong></span> &nbsp;|&nbsp;
+					<span>팀장: 박건우</span> &nbsp;|&nbsp;
+					<span>팀원: 김민선, 박유진, 이철</span>
+				</div>
+				<div class="text-muted">
+					<span>Location: 61928 광주광역시 서구 경열로 3 (농성동 271-4)</span>
+				</div>
+				<p class="mb-0 mt-1 text-muted">copyright &copy; <strong>한울직업전문학교.</strong> All Rights Reserved.</p>
+			</div>
+		</div>
+	</footer>
+	<!-- Bootstrap JS -->
+	<script th:src="@{/bootstrap.min.js}"></script>
+
+	<!-- 자바스크립트 Start -->
+	<th:block layout:fragment="script"></th:block>
+	<!-- 자바스크립트 End -->
+
+	<!-- Dynamic Navbar Spacing -->
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const navbar = document.querySelector("nav");
+			const body = document.body;
+			const adjustPadding = () => {
+				const height = navbar ? navbar.offsetHeight : 0;
+				body.style.paddingTop = height + "px";
+			};
+
+			adjustPadding();
+			window.addEventListener("resize", adjustPadding);
+		});
+	</script>
+	
+	<!-- 팝업으로 보여줄 내용 -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered"> <div class="modal-content shadow"> <div class="modal-header border-0"> <h5 class="modal-title fw-bold" id="exampleModalLabel">알림 메시지</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body text-secondary">
+			질문을 작성하여 의료 상담을 해보세요.
+		  	<br>
+			<br>
+		  	증상에 따라서 알맞은 병원의 진료과로 안내해드립니다.
+			<br>
+			<br>
+			원하는 날짜와 시간에 예약이 가능하며, 
+			<br>
+			예약 확인도 가능합니다.
+			<br>
+			<br>
+			작성 후, 제목을 클릭하고 잠시 기다리면, 
+			<br>
+			질문의 제목과 내용을 종합하여 AI가 반응합니다.
+	      </div>
+	      <div class="modal-footer border-0">
+	        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</body>
+
+</html>

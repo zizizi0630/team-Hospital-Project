@@ -1,0 +1,14 @@
+textarea {
+    width:100%;
+}
+
+input[type=submit] {
+    margin-top:10px;
+}
+
+footer {
+    position: relative; /* 문서 흐름의 맨 끝에 위치 */
+    left: 0;
+    width: 100%; /* 부모의 100% */
+    min-width: 100vw; /* 최소 화면 너비만큼 확보하여 좌우 고정 효과 */
+}

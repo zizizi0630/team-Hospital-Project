@@ -1,0 +1,63 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+	<h2 class="border-bottom py-2" th:text="${apmt.id}"></h2>
+	<div class="card my-3">
+		<div class="card-body">
+			<div class="my-3">
+				<a th:href="@{|/apmt/modify/${apmt.id}|}" class="btn btn-sm btn-outline-secondary"
+					sec:authorize="isAuthenticated()"
+					th:if="${(apmt.apmtAuthor != null and #authentication.getPrincipal().getUsername() == apmt.apmtAuthor?.userid) or #authorization.expression('hasRole(''ADMIN'')')}"
+					th:text="수정"></a>
+				<a href="javascript:void(0);" th:data-uri="@{|/apmt/delete/${apmt.id}|}"
+					class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
+					th:if="${(apmt.apmtAuthor != null and #authentication.getPrincipal().getUsername() == apmt.apmtAuthor?.userid) or #authorization.expression('hasRole(''ADMIN'')')}"
+					th:text="삭제"></a>
+			</div>
+
+			<div class="my-3">
+				<label class="form-label fw-bold">작성자</label>
+				<div th:text="${apmt.apmtAuthor?.userid != null ? apmt.apmtAuthor.userid : '탈퇴한 사용자'}"></div>
+			</div>
+			<div class="my-3">
+				<td th:text="${#temporals.format(apmt.apmt_date, 'yyyy-MM-dd HH:mm')}"></td>
+			</div>
+			<div class="my-3">
+				<td th:if="${apmt.apmt_name != null}" th:text="${apmt.apmt_name}"></td>
+			</div>
+			<div class="my-3">
+				<td th:if="${apmt.apmt_telp != null}" th:text="${apmt.apmt_telp}"></td>
+			</div>
+			<div class="my-3">
+				<td th:if="${apmt.apmt_addr != null}" th:text="${apmt.apmt_addr}"></td>
+			</div>
+			<div class="my-3">
+				<td th:if="${apmt.apmt_gender != null}" th:text="${apmt.apmt_gender}"></td>
+			</div>
+			<div class="my-3">
+				<label class="form-label fw-bold">진료과</label>
+				<div th:if="${apmt.code != null}" th:text="${apmt.code.code_Name1}"></div>
+			</div>
+			<div class="my-3">
+				<label class="form-label fw-bold">증상</label>
+				<div th:if="${apmt.symptoms != null}" th:text="${apmt.symptoms}" style="white-space: pre-line;"></div>
+			</div>
+			<!--div class="my-3">
+				<td th:text="${#temporals.format(apmt.C_U_Date, 'yyyy-MM-dd HH:mm')}"></td>
+			</div-->
+		</div>
+	</div>
+</div>
+
+<script layout:fragment="script" type='text/javascript'>
+	const delete_elements = document.getElementsByClassName("delete");
+	Array.from(delete_elements).forEach(function (element) {
+		element.addEventListener('click', function () {
+			if (confirm("정말로 삭제하시겠습니까?")) {
+				location.href = this.dataset.uri;
+			};
+		});
+	});
+
+</script>
+
+</html>

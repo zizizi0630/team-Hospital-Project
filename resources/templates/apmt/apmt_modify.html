@@ -1,0 +1,56 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container">
+	<h5 class="my-3 border-bottom pb-2">예약수정</h5>
+	<form sec:authorize="hasRole('ADMIN')" th:action="@{|/apmt/modify/${apmtForm.id}|}" th:object="${apmtForm}"
+		method="post">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
+		<div class="mb-3">
+			<label for="id" class="form-label">예약번호</label>
+			<input type="text" th:field="*{id}" class="form-control" readonly>
+		</div>
+		<div class="mb-3">
+			<label for="apmt_name" class="form-label">이름</label>
+			<input type="text" th:field="*{apmt_name}" class="form-control">
+		</div>
+		<div class="mb-3">
+			<label for="apmt_telp" class="form-label">전화번호</label>
+			<input type="text" th:field="*{apmt_telp}" class="form-control">
+		</div>
+		<div class="mb-3">
+			<label for="apmt_addr" class="form-label">주소</label>
+			<input type="text" th:field="*{apmt_addr}" class="form-control">
+		</div>
+
+		<div class="mb-3">
+			<label for="codeId" class="form-label">진료과</label>
+			<select th:field="*{codeId}" class="form-select" style="width: 100%; padding: 5px;">
+				<option value="">[진료과 선택]</option>
+				<option th:each="code : ${codeList}" th:value="${code.codeId}"
+					th:text="${code.code_Name1} + ' (' + ${code.code_Name2} + ')'"></option>
+			</select>
+		</div>
+
+		<div class="mb-3">
+			<label for="symptoms" class="form-label">증상</label>
+			<textarea th:field="*{symptoms}" class="form-control" rows="3"></textarea>
+		</div>
+		<div class="col-6" style="width: 300px; box-sizing: border-box;">
+			<label for="apmt_gender" class="form-label">성별</label><BR>
+			<select th:field="*{apmt_gender}" style="width: 100%; padding: 5px;" required>
+				<option value="" disabled selected hidden>[성별 선택]</option>
+				<option value="M">남성</option>
+				<option value="F">여성</option>
+			</select>
+		</div>
+		<div class="mb-3">
+			<label for="apmt_date" class="form-label">예약일</label>
+			<input type="datetime-local" th:field="*{apmt_date}" class="form-control" style="width: 20%; padding: 5px;"
+				required>
+		</div>
+
+		<input type="submit" value="저장하기" class="btn btn-primary my-2">
+	</form>
+</div>
+
+</html>

@@ -1,0 +1,81 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <h2 class="border-bottom py-2">의료진 소개</h2>
+    <div>
+        <div>
+            <table class="table">
+                <!-- 내과 (I) -->
+                <thead class="table-dark">
+                    <tr class="text-center">
+                        <th colspan="3" class="fs-5">내과</th>
+                    </tr>
+                    <tr class="text-center">
+                        <th>상세설명</th>
+                        <th>부서명</th>
+                        <th>의료진 이름</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" th:each="doctor, loop : ${doctorListI}">
+                        <td><a th:href="@{|/dtinfo/detail/${doctor.id}|}" th:text="${loop.count}"></a></td>
+                        <td th:text="${doctor.code != null ? doctor.code.code_Name1 : '-'}"></td>
+                        <td th:text="${doctor.user_name}"></td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(doctorListI)}">
+                        <td colspan="3" class="text-center py-3">해당 진료과 의료진이 없습니다.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table class="table">
+                <!-- 외과 (S) -->
+                <thead class="table-dark">
+                    <tr class="text-center">
+                        <th colspan="3" class="fs-5">외과</th>
+                    </tr>
+                    <tr class="text-center">
+                        <th>상세설명</th>
+                        <th>부서명</th>
+                        <th>의료진 이름</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" th:each="doctor, loop : ${doctorListS}">
+                        <td><a th:href="@{|/dtinfo/detail/${doctor.id}|}" th:text="${loop.count}"></a></td>
+                        <td th:text="${doctor.code != null ? doctor.code.code_Name1 : '-'}"></td>
+                        <td th:text="${doctor.user_name}"></td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(doctorListS)}">
+                        <td colspan="3" class="text-center py-3">해당 진료과 의료진이 없습니다.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table class="table">
+                <!-- 기타 (G) -->
+                <thead class="table-dark">
+                    <tr class="text-center">
+                        <th colspan="3" class="fs-5">기타</th>
+                    </tr>
+                    <tr class="text-center">
+                        <th>상세설명</th>
+                        <th>부서명</th>
+                        <th>의료진 이름</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" th:each="doctor, loop : ${doctorListG}">
+                        <td><a th:href="@{|/dtinfo/detail/${doctor.id}|}" th:text="${loop.count}"></a></td>
+                        <td th:text="${doctor.code != null ? doctor.code.code_Name1 : '-'}"></td>
+                        <td th:text="${doctor.user_name}"></td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(doctorListG)}">
+                        <td colspan="3" class="text-center py-3">해당 진료과 의료진이 없습니다.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</html>

@@ -1,0 +1,33 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <div class="my-3 border-bottom">
+        <div>
+            <h4>신규코드등록</h4>
+        </div>
+    </div>
+    <form th:action="@{/code/insert}" th:object="${codeForm}" method="post">
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div class="mb-3">
+            <label for="codeId" class="form-label">코드</label>
+            <input type="text" th:field="*{codeId}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="code_Name1" class="form-label">코드명칭</label>
+            <input type="text" th:field="*{code_Name1}" class="form-control">
+        </div>
+		<div class="mb-3">
+		    <label for="code_Name2" class="form-label">코드설명</label>
+		    <input type="text" th:field="*{code_Name2}" class="form-control">
+		</div>
+		<div class="mb-3">
+		    <label for="floor" class="form-label">위치</label>
+		    <input type="text" th:field="*{floor}" class="form-control">
+		</div>
+		<div class="mb-3">
+		    <label for="telp" class="form-label">전화번호</label>
+		    <input type="text" th:field="*{telp}" class="form-control">
+		</div>
+        <button type="submit" class="btn btn-primary">신규코드등록</button>
+    </form>
+</div>
+</html>

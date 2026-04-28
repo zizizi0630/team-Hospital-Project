@@ -1,0 +1,86 @@
+<html layout:decorate="~{layout}">
+<div class="card text-center" layout:fragment="content">
+	<!-- 현재 로그인 여부 확인
+	<div sec:authorize="isAuthenticated()">
+		로그인 : <span sec:authentication="name">로그인 아이디</span>
+	</div-->
+
+	<!--'ROLE_ADMIN' 권한을 가진 사용자에게만 이 버튼을 보여줍니다.-->
+	<div sec:authorize="hasRole('ADMIN')">
+		<p>권한 : 관리 사용자</p>
+	</div>
+
+	<div style="position: relative; z-index: 20;">
+		<a class="navbar-brand" href="/" style="display:block; margin:0; padding:0;">
+			<img id="mainImage" src="/image/main.png" alt="메인 이미지"
+				style="width:100%; height:auto; display:block; transition: opacity .35s ease; opacity: 1;">
+		</a>
+	</div>
+
+	<div class="container my-4">
+		<div class="row g-4 justify-content-center">
+
+			<a class="col-4 d-flex justify-content-center" href="/codei_info">
+				<div class="card overflow-hidden fixed-card">
+					<img src="/image/internal.png" alt="내과" class="fixed-img">
+				</div>
+			</a>
+
+			<a class="col-4 d-flex justify-content-center" href="/codes_info">
+				<div class="card overflow-hidden fixed-card">
+					<img src="/image/surgery.png" alt="외과" class="fixed-img">
+				</div>
+			</a>
+
+			<a class="col-4 d-flex justify-content-center" href="/codeg_info">
+				<div class="card overflow-hidden fixed-card">
+					<img src="/image/special.png" alt="기타 전문과" class="fixed-img">
+				</div>
+			</a>
+
+		</div>
+	</div>
+
+	<style>
+		#leftBg {
+			display: none;
+		}
+	</style>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			var images = ["/image/main.png", "/image/main2.png", "/image/main3.png"];
+			var i = 0;
+			var img = document.getElementById("mainImage");
+
+			// ✅ (추가) 프리로드: 다음 이미지들을 미리 받아두기
+			for (var p = 0; p < images.length; p++) {
+				var pre = new Image();
+				pre.src = images[p];
+			}
+			setInterval(function () { //일정 시간마다 반복 실행
+
+				//img.style.opacity = 0; //이미지를 서서히 투명하게
+
+				setTimeout(function () {
+					i = i + 1;
+					if (i >= images.length) i = 0;
+
+					var nextSrc = images[i];   // ✅ 이 줄만 추가 
+
+
+					// ✅ 로딩 완료 후에만 교체
+					var pre = new Image();
+					pre.onload = function () {
+						img.src = nextSrc;
+						img.style.opacity = 1;
+					};
+					pre.src = nextSrc;
+
+				}, 300);
+			}, 3000);
+		});
+	</script>
+</div>
+
+</html>

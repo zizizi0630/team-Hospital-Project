@@ -1,0 +1,36 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="table-responsive container my-3" style="width: auto; white-space: nowrap;">
+	<div class="row my-3">
+	    <div class="col-6">
+			<a sec:authorize="hasRole('ADMIN')" th:href="@{/apmt/insert}" class="btn btn-primary">신규예약등록</a>
+	    </div>
+	</div>
+	<table class="table">
+        <thead class="table-dark">
+			<tr class="text-center">
+			    <th>번호</th>
+				<th>작성자</th>
+				<th>예약일</th>
+			    <th>이름</th>
+			    <th>전화번호</th>
+			    <th>주소</th>
+				<th>성별</th>
+				<th>입력(수정)일시</th>
+			</tr>
+        </thead>
+        <tbody>
+			<tr class="text-center" th:each="apmtList : ${apmtList}">
+			    <td class="text-start">
+			        <a th:href="@{|/apmt/detail/${apmtList.id}|}" th:text="${apmtList.id}"></a>
+			    </td>
+				<td th:text="${apmtList.apmtAuthor?.userid != null ? apmtList.apmtAuthor.userid : '탈퇴회원'}"></td>
+				<td th:text="${#temporals.format(apmtList.apmt_date, 'yyyy-MM-dd HH:mm')}"></td>
+			    <td th:if="${apmtList.apmt_name != null}" th:text="${apmtList.apmt_name}"></td>
+				<td th:if="${apmtList.apmt_telp != null}" th:text="${apmtList.apmt_telp}"></td>
+				<td th:if="${apmtList.apmt_addr != null}" th:text="${apmtList.apmt_addr}"></td>
+				<td th:if="${apmtList.apmt_gender != null}" th:text="${apmtList.apmt_gender}"></td>
+				<td th:text="${#temporals.format(apmtList.C_U_Date, 'yyyy-MM-dd HH:mm')}"></td>
+			</tr>
+		</tbody>
+    </table>
+</html>

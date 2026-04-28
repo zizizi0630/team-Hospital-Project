@@ -1,0 +1,50 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+	<h2 class="border-bottom py-2" th:text="${code.id}"></h2>
+	<h2 class="border-bottom py-2" th:text="${code.codeId}"></h2>
+	<div class="card my-3">
+		<div class="card-body">
+			<div class="my-3">
+				<a th:href="@{|/code/modify/${code.id}|}" class="btn btn-sm btn-outline-secondary"
+					sec:authorize="isAuthenticated()"
+					th:if="${code.codeAuthor != null and #authentication.getPrincipal().getUsername() == code.codeAuthor.userid}"
+					th:text="수정" ></a>
+				<a href="javascript:void(0);" th:data-uri="@{|/code/delete/${code.id}|}"
+					class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
+					th:if="${code.codeAuthor != null and #authentication.getPrincipal().getUsername() == code.codeAuthor.userid}"
+					th:text="삭제"></a>
+			</div>
+			
+			<div class="my-3">
+				<td th:if="${code.code_Name1 != null}" th:text="${code.code_Name1}"></td>
+			</div>
+			<div class="my-3">
+				<td th:if="${code.code_Name2 != null}" th:text="${code.code_Name2}"></td>
+			</div>
+			<div class="my-3">
+				<td th:if="${code.floor != null}" th:text="${code.floor}"></td>
+			</div>
+			<div class="my-3">
+				<td th:if="${code.telp != null}" th:text="${code.telp}"></td>
+			</div>
+			<div class="my-3">
+				<td th:text="${#temporals.format(code.code_Date, 'yyyy-MM-dd HH:mm')}"></td>
+			</div>
+
+		</div>
+	</div>
+</div>
+	
+	<script layout:fragment="script" type='text/javascript'>
+		const delete_elements = document.getElementsByClassName("delete");
+		Array.from(delete_elements).forEach(function (element) {
+			element.addEventListener('click', function () {
+				if (confirm("정말로 삭제하시겠습니까?")) {
+					location.href = this.dataset.uri;
+				};
+			});
+		});
+		
+	</script>
+
+</html>

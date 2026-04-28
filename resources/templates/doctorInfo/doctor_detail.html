@@ -1,0 +1,45 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+	<h2 class="border-bottom py-2">의료진 상세 소개</h2>
+
+	<div class="card my-3" th:if="${siteUser != null}">
+		<div class="card-body" th:if="${siteUser.role == 'DOCTOR'}">
+			<h3 class="card-title pb-3 border-bottom" th:text="${siteUser.user_name} + ' 선생님'"></h3>
+
+			<div class="my-4">
+				<h5 class="fw-bold text-primary">전문 진료 과목</h5>
+				<p class="fs-5" th:text="${siteUser.code != null ? siteUser.code.code_Name1 : '정보 없음'}"></p>
+			</div>
+
+			<div class="my-4">
+				<h5 class="fw-bold text-success">약력/경력 소개</h5>
+				<div class="p-3 bg-light rounded" style="white-space: pre-line;"
+					th:text="${siteUser.content1 != null ? siteUser.content1 : '등록된 정보가 없습니다.'}"></div>
+			</div>
+
+			<div class="my-4">
+				<h5 class="fw-bold text-info">주요 경력</h5>
+				<div class="p-3 bg-light rounded" style="white-space: pre-line;"
+					th:text="${siteUser.content2 != null ? siteUser.content2 : '등록된 정보가 없습니다.'}"></div>
+			</div>
+
+			<div class="my-4">
+				<h5 class="fw-bold text-warning">상세 진료 분야</h5>
+				<div class="p-3 bg-light rounded" style="white-space: pre-line;"
+					th:text="${siteUser.content3 != null ? siteUser.content3 : '등록된 정보가 없습니다.'}"></div>
+			</div>
+
+			<div class="my-3 text-end">
+				<a th:href="@{/dtinfo}" class="btn btn-secondary">목록으로</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="alert alert-danger" th:if="${siteUser == null}">
+		해당 의료진 정보를 찾을 수 없습니다.
+	</div>
+
+
+</div>
+
+</html>
